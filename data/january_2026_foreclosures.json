@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "source": "Brevard County Clerk of Court",
+    "url": "http://vweb2.brevardclerk.us/Foreclosures/foreclosure_sales.html",
+    "retrieved": "2025-12-24",
+    "location": "518 S. Palm Ave, Titusville, FL - Brevard Room",
+    "time": "11:00 AM",
+    "type": "IN-PERSON AUCTION"
+  },
+  "auction_dates": [
+    {
+      "date": "2026-01-07",
+      "day": "Wednesday",
+      "cases": [
+        {"case_number": "05-2018-CA-034906-XXXX-XX", "plaintiff": "US BANK NA", "defendant": "ANNMARIE BALCH", "status": "ACTIVE"},
+        {"case_number": "05-2023-CA-028847-XXXX-XX", "plaintiff": "LAKEVIEW", "defendant": "C L HENDERSON", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-012193-XXCA-BC", "plaintiff": "UNITED WHOLESALE", "defendant": "M WILLIAMS", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-013801-XXCA-BC", "plaintiff": "LAKEVIEW LOAN", "defendant": "JAMES PUTIRA", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-025470-XXCA-BC", "plaintiff": "CARLOS SUD", "defendant": "METRO EASTWEST", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-040529-XXCA-BC", "plaintiff": "FEDERAL HOME", "defendant": "UNKNOWN HEIRS", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-047626-XXCA-BC", "plaintiff": "US BANK", "defendant": "ELEONORE VAUGHAN", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-049701-XXCA-BC", "plaintiff": "US BANK", "defendant": "RED KEY 38", "status": "CANCELLED"},
+        {"case_number": "05-2024-CA-055354-XXCA-BC", "plaintiff": "FINANCE AMERICA", "defendant": "G LAMBERT", "status": "ACTIVE"},
+        {"case_number": "05-2024-CC-035201-XXCC-BC", "plaintiff": "JAMES LANDING", "defendant": "MELVIN EZELL", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-010717-XXCA-BC", "plaintiff": "A CHARLESWELL", "defendant": "D GONZALEZ", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-012394-XXCA-BC", "plaintiff": "US BANK TRUST", "defendant": "KAREN BISHOP", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-015620-XXCA-BC", "plaintiff": "CARRINGTON", "defendant": "CYNTHIA M SYMON", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-019775-XXCA-BC", "plaintiff": "OCEAN LANDING", "defendant": "KULDEEP PALL", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-020385-XXCA-BC", "plaintiff": "BANK NY MELLON", "defendant": "R PALUMBO", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-024328-XXCA-BC", "plaintiff": "PLANET HOME", "defendant": "JUSTIN L GIBBS", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-024851-XXCA-BC", "plaintiff": "FREEDOM MORTGAGE", "defendant": "S ZAGOFSKY", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-024869-XXCA-BC", "plaintiff": "WILMINGTON TRST", "defendant": "ANGELA HOLD", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-025470-XXCA-BC", "plaintiff": "WILMINGTON SAV", "defendant": "M R DOWLING", "status": "ACTIVE"},
+        {"case_number": "05-2025-CC-022936-XXCC-BC", "plaintiff": "CENTRAL VIERA", "defendant": "G MCLOUGHLIN", "status": "ACTIVE"}
+      ]
+    },
+    {
+      "date": "2026-01-14",
+      "day": "Wednesday",
+      "cases": [
+        {"case_number": "05-2018-CA-043854-XXXX-XX", "plaintiff": "PNC BANK", "defendant": "KEVIN I NAZARIO", "status": "ACTIVE"},
+        {"case_number": "05-2023-CA-059140-XXXX-XX", "plaintiff": "FREEDOM", "defendant": "JEFFREY LEE ARAUJO", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-023934-XXCA-BC", "plaintiff": "DEUTSCHE BANK", "defendant": "P WILLIAMS", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-027728-XXCA-BC", "plaintiff": "NATIONSTAR", "defendant": "C LIGHTBOURN", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-033434-XXCA-BC", "plaintiff": "AMERIHOME", "defendant": "CHRISTINE RIVERA", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-033754-XXCA-BC", "plaintiff": "SWBC MORTGAGE", "defendant": "KEISHA RANKIN", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-036258-XXCA-BC", "plaintiff": "NEWREZ LLC", "defendant": "SARAH N MAESTRE", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-037111-XXCA-BC", "plaintiff": "NATIONSTAR", "defendant": "GLEN BRANHAM", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-039767-XXCA-BC", "plaintiff": "BUILDERS", "defendant": "PALLADIO DEVELOP", "status": "CANCELLED"},
+        {"case_number": "05-2024-CA-046839-XXCA-BC", "plaintiff": "FREEDOM MORTGAGE", "defendant": "C COBB", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-048107-XXCA-BC", "plaintiff": "DEUTSCHE", "defendant": "RICHARD GILLESPIE", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-049699-XXCA-BC", "plaintiff": "WILMINGTON", "defendant": "JAMES RAY", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-053818-XXCA-BC", "plaintiff": "STUART R KALB", "defendant": "GO ECO HOMES", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-056239-XXCA-BC", "plaintiff": "US BANK NA", "defendant": "REJOHNA K KUHNS", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-057995-XXCA-BC", "plaintiff": "NEWREZ LLC", "defendant": "MARK CONKLIN", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-058208-XXCA-BC", "plaintiff": "NATL REC", "defendant": "LYNETTE MENSAH", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-061006-XXCA-BC", "plaintiff": "NEWREZ LLC", "defendant": "KAREN ROBINSON", "status": "ACTIVE"},
+        {"case_number": "05-2024-CC-018168-XXCC-BC", "plaintiff": "DIANA SHORES", "defendant": "BETTY W HOLDER", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-014469-XXCA-BC", "plaintiff": "NATIONSTAR MTGE", "defendant": "NILKA NUNEZ", "status": "CANCELLED"},
+        {"case_number": "05-2025-CA-017810-XXCA-BC", "plaintiff": "FREEDOM MORTGAGE", "defendant": "D A CHAPO", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-028313-XXCA-BC", "plaintiff": "W D'ANGELO", "defendant": "M A SARACCO", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-031438-XXCA-BC", "plaintiff": "UNION HOME", "defendant": "TAM T NGO", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-035093-XXCA-BC", "plaintiff": "COMM CREDIT UNION", "defendant": "DUNLEAVY", "status": "ACTIVE"},
+        {"case_number": "05-2025-CC-017098-XXCC-BC", "plaintiff": "NORTHFIELD", "defendant": "SHANNON K YOUNG", "status": "CANCELLED"}
+      ]
+    },
+    {
+      "date": "2026-01-26",
+      "day": "Monday",
+      "cases": [
+        {"case_number": "05-2022-CA-034421-XXXX-XX", "plaintiff": "JPMORGAN", "defendant": "CHRIS NETRAM", "status": "ACTIVE"}
+      ]
+    },
+    {
+      "date": "2026-01-28",
+      "day": "Wednesday",
+      "cases": [
+        {"case_number": "05-2016-CA-010468-XXXX-XX", "plaintiff": "JPMORGAN", "defendant": "ALBERT N KISH", "status": "ACTIVE"},
+        {"case_number": "05-2021-CA-049948-XXXX-XX", "plaintiff": "BANK NEW YORK", "defendant": "RUTH NEWTON", "status": "ACTIVE"},
+        {"case_number": "05-2022-CA-038736-XXXX-XX", "plaintiff": "US BANK", "defendant": "A MELENDEZ", "status": "ACTIVE"},
+        {"case_number": "05-2023-CC-052289-XXXX-XX", "plaintiff": "VISTA OAKS", "defendant": "RODNEY B MEDLEY", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-031916-XXCA-BC", "plaintiff": "NATIONSTAR", "defendant": "JENNIFER GRAFING", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-039789-XXCA-BC", "plaintiff": "NEW RESIDENTIAL", "defendant": "J PETERS", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-041248-XXCA-BC", "plaintiff": "LAKEVIEW LOAN", "defendant": "TODD H LYONS", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-042824-XXCA-BC", "plaintiff": "MORTGAGE ASSETS", "defendant": "W SCHRANK", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-043460-XXCA-BC", "plaintiff": "MORTGAGE", "defendant": "CHERYL MORRISON", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-044452-XXCA-BC", "plaintiff": "EDISTO LOAN", "defendant": "900 MIRAMAR LLC", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-050404-XXCA-BC", "plaintiff": "FINANCE", "defendant": "BRUCE GARDNER", "status": "ACTIVE"},
+        {"case_number": "05-2024-CA-051000-XXCA-BC", "plaintiff": "HALLMARK HOME", "defendant": "W GOLDEN", "status": "CANCELLED"},
+        {"case_number": "05-2024-CA-052446-XXCA-BC", "plaintiff": "DATA MORTGAGE", "defendant": "KIERRA MURPHY", "status": "ACTIVE"},
+        {"case_number": "05-2024-CC-031814-XXCC-BC", "plaintiff": "TOWN HOMES", "defendant": "BENJAMIN WALROTH", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-010345-XXCA-BC", "plaintiff": "US BANK", "defendant": "RED KEY 38 INC", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-015724-XXCA-BC", "plaintiff": "VILLAGE CAPITAL", "defendant": "M PAYNE", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-017117-XXCA-BC", "plaintiff": "NATIONSTAR", "defendant": "MICHAEL J CONN", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-029490-XXCA-BC", "plaintiff": "B-MUSED", "defendant": "EDWARD J MADEJCZYK", "status": "ACTIVE"},
+        {"case_number": "05-2025-CA-033176-XXCA-BC", "plaintiff": "PENNYMAC", "defendant": "INDIETROPIC LLC", "status": "ACTIVE"}
+      ]
+    }
+  ],
+  "summary": {
+    "total_january_cases": 64,
+    "active_cases": 57,
+    "cancelled_cases": 7,
+    "auction_dates_count": 4
+  }
+}
