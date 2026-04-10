@@ -158,7 +158,7 @@ interface CountyBounds {
 | Resource | URL | Purpose |
 |----------|-----|---------|
 | BECA | https://vmatrix1.brevardclerk.us/beca/beca_splash.cfm | Court records lookup |
-| Clerk Foreclosure List | http://vweb2.brevardclerk.us/Foreclosures/foreclosure_sales.html | Data source |
+| Clerk Foreclosure List | http://www.brevardclerk.us/Foreclosures/foreclosure_sales.html | Data source |
 | BidDeed Dashboard | https://brevard-bidder-landing.pages.dev | Main app |
 | AI Chat | https://brevard-bidder-landing.pages.dev/chat | Support interface |
 
@@ -441,7 +441,7 @@ git push origin main
 **Frequency**: Weekly (before Wednesday auctions)
 
 **Procedure**:
-1. Visit http://vweb2.brevardclerk.us/Foreclosures/foreclosure_sales.html
+1. Visit http://www.brevardclerk.us/Foreclosures/foreclosure_sales.html
 2. Copy table data
 3. Update FORECLOSURES array in index.html
 4. Update dropdown options if dates change
