@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BidDeed.AI - Brevard County Foreclosure Map</title>
-  <meta name="description" content="Interactive foreclosure auction map for Brevard County, Florida. ML-powered recommendations for real estate investors.">
+  <title>BidDeed.AI — Florida Foreclosure & Tax Deed Map (67 Counties)</title>
+  <meta name="description" content="Live multi-county Florida foreclosure & tax deed auction map. RealAuction + RealForeclose scraped feed, Shapira ML scoring, Drive-for-Dollars route builder.">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -395,7 +395,7 @@
     <aside class="sidebar">
       <div class="sidebar-header">
         <div class="sidebar-title-row">
-          <h2 class="sidebar-title">Upcoming Auctions</h2>
+          <h2 class="sidebar-title">Upcoming FL Auctions</h2>
           <span class="property-count" id="property-count">12</span>
         </div>
         <div class="auction-info">
@@ -464,6 +464,10 @@
         <div class="stat-item">
           <div class="stat-value" id="stat-review" style="color: #eab308">4</div>
           <div class="stat-label">REVIEW</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-counties" style="color:#38bdf8">—</div>
+          <div class="stat-label">Counties</div>
         </div>
         <div class="stat-item">
           <div class="stat-value" id="stat-judgment">$3.4M</div>
@@ -789,6 +793,15 @@
       return Math.max(0, Math.round(max));
     }
 
+    function deriveIsHoa(row) {
+      // Heuristic: HOA/condo foreclosures have small judgments relative to market value
+      // (typical mortgage = 30-60% LTV; HOA = <10% LTV with judgment <$50K)
+      const judgment = Number(row.judgment) || 0;
+      const market = Number(row.market_value) || Number(row.avm_value) || 0;
+      if (judgment <= 0 || market <= 0) return false;
+      return judgment < 50000 && (judgment / market) < 0.10;
+    }
+
     function deriveRecommendation(row, maxBid) {
       const judgment = Number(row.judgment) || 0;
       if (judgment <= 0 || maxBid <= 0) return 'SKIP';
@@ -837,7 +850,8 @@
         sqft: row.sqft || 0,
         year_built: row.year_built || 0,
         bcpao_photo_url: row.photo_url,
-        is_hoa_foreclosure: false,
+        is_hoa_foreclosure: deriveIsHoa(row),
+        senior_lien: deriveIsHoa(row) ? { holder: 'Unknown — verify on AcclaimWeb', amount: 0 } : null,
         realforeclose_url: row.realforeclose_url,
         clerk_url: row.clerk_url,
         po_seo_url: row.po_seo_url,
@@ -1031,7 +1045,8 @@
     document.getElementById('route-optimize').addEventListener('click', optimizeRoute);
     
     // Initialize map centered on Brevard County
-    const map = L.map('map').setView([28.2639, -80.7214], 10);
+    // Statewide FL view by default — recentered for multi-county scope
+    const map = L.map('map').setView([27.95, -81.7], 7);
     
     // Dark tile layer
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -1115,7 +1130,7 @@
       return `
         <div class="property-card ${recClass}${hoaClass}" data-id="${prop.id}" data-lat="${prop.latitude}" data-lng="${prop.longitude}">
           <div class="property-address">${prop.property_address}</div>
-          <div class="property-case">${prop.case_number} | ${prop.plaintiff}</div>
+          <div class="property-case">${prop.county ? prop.county.toUpperCase().replace(/_/g,' ') : ''}${prop.county ? ' · ' : ''}${prop.case_number || ''}${prop.auction_date ? ' · ' + prop.auction_date : ''}</div>
           <div class="property-meta">
             <div class="meta-item">
               <span class="meta-label">Judgment</span>
@@ -1194,6 +1209,8 @@
       document.getElementById('stat-judgment').textContent = totalJudgment >= 1000000 
         ? `$${(totalJudgment / 1000000).toFixed(1)}M` 
         : formatCurrency(totalJudgment);
+      const countiesSet = new Set(data.map(p => p.county).filter(Boolean));
+      document.getElementById('stat-counties').textContent = countiesSet.size || '—';
       document.getElementById('property-count').textContent = data.length;
     }
 
