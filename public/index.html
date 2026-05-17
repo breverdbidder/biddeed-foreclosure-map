@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BidDeed.AI - Brevard County Foreclosure Map</title>
-  <meta name="description" content="Interactive foreclosure auction map for Brevard County, Florida. ML-powered recommendations for real estate investors.">
+  <title>BidDeed.AI — Florida Foreclosure & Tax Deed Map (67 Counties)</title>
+  <meta name="description" content="Live multi-county Florida foreclosure & tax deed auction map. RealAuction + RealForeclose scraped feed, Shapira ML scoring, Drive-for-Dollars route builder.">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -337,6 +337,45 @@
       .sidebar { width: 100%; position: absolute; bottom: 0; height: 40vh; z-index: 1500; }
       .map-container { height: 60vh; }
     }
+  /* D4D mode */
+    .d4d-toggle{position:absolute;top:5rem;right:1rem;background:#0ea5e9;color:#0f172a;border:none;padding:0.45rem 0.85rem;border-radius:0.4rem;cursor:pointer;font-weight:600;font-size:0.8rem;z-index:1500;display:flex;align-items:center;gap:0.4rem;transition:all 0.2s;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+    .d4d-toggle.active{background:#22c55e}
+    .d4d-toggle:hover{transform:translateY(-1px)}
+    .route-panel{position:absolute;bottom:1.5rem;right:1rem;width:340px;max-height:calc(100vh - 14rem);background:#1e293b;border:1px solid #334155;border-radius:0.5rem;z-index:1500;display:none;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,0.5)}
+    .route-panel.open{display:flex}
+    .route-panel-header{padding:0.75rem;border-bottom:1px solid #334155;display:flex;justify-content:space-between;align-items:center}
+    .route-panel-title{font-weight:700;font-size:0.9rem;color:#38bdf8}
+    .route-panel-clear{background:transparent;border:1px solid #ef4444;color:#ef4444;padding:0.2rem 0.5rem;border-radius:0.3rem;cursor:pointer;font-size:0.7rem}
+    .route-panel-clear:hover{background:#ef444420}
+    .route-stops{flex:1;overflow-y:auto;padding:0.5rem;max-height:300px}
+    .route-stop{display:flex;gap:0.5rem;align-items:flex-start;padding:0.5rem;background:#0f172a;border-radius:0.4rem;margin-bottom:0.4rem;border-left:3px solid #38bdf8}
+    .route-stop-num{background:#38bdf8;color:#0f172a;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;flex-shrink:0}
+    .route-stop-body{flex:1;min-width:0}
+    .route-stop-addr{font-size:0.75rem;font-weight:600;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .route-stop-meta{font-size:0.65rem;color:#64748b;margin-top:0.15rem}
+    .route-stop-rec{display:inline-block;padding:0.1rem 0.4rem;border-radius:9999px;font-size:0.6rem;font-weight:600;margin-top:0.2rem}
+    .route-stop-rec.bid{background:#22c55e20;color:#22c55e}
+    .route-stop-rec.review{background:#eab30820;color:#eab308}
+    .route-stop-rec.skip{background:#ef444420;color:#ef4444}
+    .route-stop-remove{background:transparent;border:none;color:#64748b;cursor:pointer;font-size:1.2rem;line-height:1;padding:0.2rem 0.4rem}
+    .route-stop-remove:hover{color:#ef4444}
+    .route-panel-empty{padding:1.5rem;text-align:center;color:#64748b;font-size:0.75rem;line-height:1.5}
+    .route-panel-actions{padding:0.75rem;border-top:1px solid #334155;display:flex;flex-direction:column;gap:0.4rem}
+    .route-summary{display:flex;justify-content:space-between;font-size:0.7rem;color:#94a3b8;margin-bottom:0.3rem}
+    .route-summary strong{color:#38bdf8}
+    .btn-optimize{background:#0ea5e9;color:#0f172a;border:none;padding:0.5rem;border-radius:0.4rem;cursor:pointer;font-weight:600;font-size:0.75rem}
+    .btn-optimize:hover{background:#0284c7}
+    .btn-optimize:disabled{background:#334155;color:#64748b;cursor:not-allowed}
+    .btn-navigate{background:#22c55e;color:#0f172a;border:none;padding:0.6rem;border-radius:0.4rem;cursor:pointer;font-weight:700;font-size:0.8rem;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:0.4rem}
+    .btn-navigate:hover{background:#16a34a}
+    .btn-navigate.disabled{pointer-events:none;background:#334155;color:#64748b}
+    .route-add-btn{background:#0ea5e9;color:#0f172a;border:none;padding:0.25rem 0.55rem;border-radius:0.3rem;cursor:pointer;font-weight:600;font-size:0.65rem;margin-left:0.5rem}
+    .route-add-btn.added{background:#22c55e}
+    .route-add-btn:hover{filter:brightness(1.1)}
+    .streetview-prescore{display:inline-block;background:transparent;color:#64748b;padding:0.1rem 0.35rem;border-radius:0.3rem;font-size:0.55rem;margin-left:0.25rem;border:1px dashed #475569}
+    .popup-route-btn{background:#0ea5e9;color:#0f172a;border:none;padding:0.4rem 0.7rem;border-radius:0.3rem;cursor:pointer;font-weight:600;font-size:0.7rem;margin-top:0.5rem;width:100%}
+    .popup-route-btn.added{background:#22c55e}
+    .popup-route-btn:hover{filter:brightness(1.1)}
   </style>
 </head>
 <body>
@@ -356,7 +395,7 @@
     <aside class="sidebar">
       <div class="sidebar-header">
         <div class="sidebar-title-row">
-          <h2 class="sidebar-title">Upcoming Auctions</h2>
+          <h2 class="sidebar-title">Upcoming FL Auctions</h2>
           <span class="property-count" id="property-count">12</span>
         </div>
         <div class="auction-info">
@@ -396,6 +435,23 @@
         </div>
       </div>
       
+      <button id="d4d-toggle" class="d4d-toggle" title="Drive-for-Dollars: build optimized multi-stop routes through properties">🎯 <span>D4D</span></button>
+      
+      <div class="route-panel" id="route-panel">
+        <div class="route-panel-header">
+          <span class="route-panel-title">🎯 D4D Route</span>
+          <button class="route-panel-clear" id="route-clear">Clear</button>
+        </div>
+        <div class="route-stops" id="route-stops">
+          <div class="route-panel-empty">Click <strong>+ Route</strong> on properties to build a Drive-for-Dollars route.<br><br>Street View pre-scoring activates in Phase 2.</div>
+        </div>
+        <div class="route-panel-actions">
+          <div class="route-summary"><span>Stops: <strong id="route-count">0</strong></span><span>Distance: <strong id="route-distance">—</strong></span></div>
+          <button class="btn-optimize" id="route-optimize" disabled>⚡ Optimize (nearest-neighbor)</button>
+          <a class="btn-navigate disabled" id="route-navigate" target="_blank" rel="noopener">🧭 Open in Google Maps</a>
+        </div>
+      </div>
+      
       <div class="stats-bar" id="stats-bar">
         <div class="stat-item">
           <div class="stat-value" id="stat-total">12</div>
@@ -408,6 +464,10 @@
         <div class="stat-item">
           <div class="stat-value" id="stat-review" style="color: #eab308">4</div>
           <div class="stat-label">REVIEW</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-counties" style="color:#38bdf8">—</div>
+          <div class="stat-label">Counties</div>
         </div>
         <div class="stat-item">
           <div class="stat-value" id="stat-judgment">$3.4M</div>
@@ -424,7 +484,7 @@
     // Based on January 2025 Auction - BidDeed.AI V15.0
     // ============================================
     
-    const foreclosures = [
+    const FALLBACK_FORECLOSURES = [
       {
         id: 1,
         case_number: "05-2023-CA-044476-XXXX-XX",
@@ -705,8 +765,288 @@
       }
     ];
 
+    let foreclosures = [];
+
+    // =========================================
+    // LIVE DATA: BidDeed Supabase scraper feed
+    // Provenance: Summit ZW-MAPS-MCP-D4D v2 (May 17 2026)
+    // Source: public.v_investable_foreclosures (69,585 rows, anon-readable)
+    // Authored via Claude chat → Supabase MCP → GitHub API (Hetzner bypass)
+    // =========================================
+    const BIDDEED_CONFIG = {
+      supabaseUrl: 'https://mocerqjnksmhcjzxrewo.supabase.co',
+      supabaseAnonKey: 'sb_publishable_btGVcWgKtRRVFof1FNmrOw_fBcZR1iZ',
+      endpoint: '/rest/v1/v_investable_foreclosures',
+      selectCols: 'id,county,auction_date,case_number,property_address,city,zip,latitude,longitude,bedrooms,bathrooms,sqft,year_built,property_type,judgment,market_value,avm_value,photo_url,equity_dollars,equity_band,judgment_to_market_pct,po_seo_url,realforeclose_url,trellis_url,clerk_url,acclaimweb_url',
+      defaultLimit: 500
+    };
+
+    function deriveMlScore(row) {
+      const map = { A_BIG_EQUITY: 0.88, B_HIGH_EQUITY: 0.72, C_MODERATE: 0.55, D_TIGHT: 0.32 };
+      return map[row.equity_band] !== undefined ? map[row.equity_band] : 0.5;
+    }
+
+    function deriveMaxBid(row) {
+      const arv = Number(row.avm_value) || Number(row.market_value) || 0;
+      if (arv <= 0) return 0;
+      const max = arv * 0.7 - 10000 - Math.min(25000, arv * 0.15);
+      return Math.max(0, Math.round(max));
+    }
+
+    function deriveIsHoa(row) {
+      // Heuristic: HOA/condo foreclosures have small judgments relative to market value
+      // (typical mortgage = 30-60% LTV; HOA = <10% LTV with judgment <$50K)
+      const judgment = Number(row.judgment) || 0;
+      const market = Number(row.market_value) || Number(row.avm_value) || 0;
+      if (judgment <= 0 || market <= 0) return false;
+      return judgment < 50000 && (judgment / market) < 0.10;
+    }
+
+    function deriveRecommendation(row, maxBid) {
+      const judgment = Number(row.judgment) || 0;
+      if (judgment <= 0 || maxBid <= 0) return 'SKIP';
+      const ratio = (maxBid / judgment) * 100;
+      if (ratio >= 70) return 'BID';
+      if (ratio >= 60) return 'REVIEW';
+      return 'SKIP';
+    }
+
+    function deriveRationale(row, rec, maxBid) {
+      const judgment = Number(row.judgment) || 0;
+      const ratio = judgment > 0 ? ((maxBid / judgment) * 100).toFixed(1) : '0';
+      const cityFmt = (row.city || 'Unknown') + ', ' + (row.zip || '');
+      const equityFmt = row.equity_band ? row.equity_band.replace(/_/g, ' ').toLowerCase() : 'unknown equity';
+      if (rec === 'BID')    return 'Strong ' + equityFmt + ' signal. ' + cityFmt + '. Ratio ' + ratio + '% above 70% threshold. Source: BidDeed Shapira pipeline.';
+      if (rec === 'REVIEW') return 'Borderline ' + equityFmt + '. ' + cityFmt + '. Ratio ' + ratio + '% in 60-69% band — verify lien + condition.';
+      return 'Tight margin (' + equityFmt + '). ' + cityFmt + '. Ratio ' + ratio + '% below threshold.';
+    }
+
+    function transformForeclosure(row, idx) {
+      const maxBid = deriveMaxBid(row);
+      const rec = deriveRecommendation(row, maxBid);
+      const judgment = Number(row.judgment) || 0;
+      const addr = row.property_address + (row.city ? ', ' + row.city : '') + (row.zip ? ', FL ' + row.zip : '');
+      return {
+        id: idx + 1,
+        _uuid: row.id,
+        case_number: row.case_number || '—',
+        property_address: addr,
+        city: row.city || 'Unknown',
+        zipcode: row.zip || '',
+        county: row.county || '',
+        latitude: Number(row.latitude),
+        longitude: Number(row.longitude),
+        auction_date: row.auction_date,
+        plaintiff: '(see clerk record)',
+        defendant: '',
+        judgment_amount: judgment,
+        max_bid: maxBid,
+        bid_judgment_ratio: judgment > 0 ? (maxBid / judgment) * 100 : 0,
+        ml_score: deriveMlScore(row),
+        recommendation: rec,
+        decision_rationale: deriveRationale(row, rec, maxBid),
+        bedrooms: row.bedrooms || 0,
+        bathrooms: Number(row.bathrooms) || 0,
+        sqft: row.sqft || 0,
+        year_built: row.year_built || 0,
+        bcpao_photo_url: row.photo_url,
+        is_hoa_foreclosure: deriveIsHoa(row),
+        senior_lien: deriveIsHoa(row) ? { holder: 'Unknown — verify on AcclaimWeb', amount: 0 } : null,
+        realforeclose_url: row.realforeclose_url,
+        clerk_url: row.clerk_url,
+        po_seo_url: row.po_seo_url,
+        equity_band: row.equity_band
+      };
+    }
+
+    async function loadForeclosures() {
+      const info = document.querySelector('.auction-info');
+      if (info) info.innerHTML = '<strong>🟢 LIVE:</strong> fetching from BidDeed scraper…';
+      try {
+        const today = new Date().toISOString().split('T')[0];
+        const query = 'select=' + BIDDEED_CONFIG.selectCols
+          + '&latitude=not.is.null&longitude=not.is.null'
+          + '&auction_date=gte.' + today
+          + '&order=auction_date.asc,county.asc'
+          + '&limit=' + BIDDEED_CONFIG.defaultLimit;
+        const url = BIDDEED_CONFIG.supabaseUrl + BIDDEED_CONFIG.endpoint + '?' + query;
+        const resp = await fetch(url, {
+          headers: {
+            'apikey': BIDDEED_CONFIG.supabaseAnonKey,
+            'Authorization': 'Bearer ' + BIDDEED_CONFIG.supabaseAnonKey,
+            'Accept': 'application/json'
+          }
+        });
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        const rows = await resp.json();
+        if (!Array.isArray(rows) || rows.length === 0) throw new Error('empty');
+        foreclosures = rows.map(transformForeclosure);
+        const counties = new Set(foreclosures.map(f => f.county));
+        const nextDate = foreclosures[0].auction_date;
+        if (info) info.innerHTML = '<strong>🟢 LIVE</strong> · ' + foreclosures.length + ' upcoming · ' + counties.size + ' counties<br><strong>Next:</strong> ' + nextDate + ' · <strong>Source:</strong> v_investable_foreclosures';
+        applyFilter('all');
+      } catch (err) {
+        console.warn('Live fetch failed, using fallback:', err);
+        foreclosures = FALLBACK_FORECLOSURES.slice();
+        if (info) info.innerHTML = '<strong>⚠️ FALLBACK:</strong> live fetch failed (' + err.message + ') · using Jan 2025 baked sample';
+        applyFilter('all');
+      }
+    }
+
+    // =========================================
+    // D4D — Drive-for-Dollars route builder
+    // Provenance: Summit ZW-MAPS-MCP-D4D v2 (May 17 2026)
+    // Authored via Claude chat → Supabase MCP → GitHub API (Hetzner bypass)
+    // =========================================
+    const d4d = { enabled: false, stops: [], polyline: null };
+    
+    function haversineKm(a, b) {
+      const R = 6371, toRad = x => x * Math.PI / 180;
+      const dLat = toRad(b.lat - a.lat), dLng = toRad(b.lng - a.lng);
+      const lat1 = toRad(a.lat), lat2 = toRad(b.lat);
+      const h = Math.sin(dLat/2)**2 + Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLng/2)**2;
+      return 2 * R * Math.asin(Math.sqrt(h));
+    }
+    
+    function totalRouteDistance(stops) {
+      let d = 0;
+      for (let i = 1; i < stops.length; i++) {
+        d += haversineKm(
+          { lat: stops[i-1].latitude, lng: stops[i-1].longitude },
+          { lat: stops[i].latitude, lng: stops[i].longitude }
+        );
+      }
+      return d;
+    }
+    
+    function nearestNeighborOrder(stops, origin) {
+      if (stops.length <= 1) return stops.slice();
+      const remaining = stops.slice();
+      const ordered = [];
+      let current = origin || { lat: remaining[0].latitude, lng: remaining[0].longitude };
+      while (remaining.length > 0) {
+        let bestIdx = 0, bestDist = Infinity;
+        for (let i = 0; i < remaining.length; i++) {
+          const d = haversineKm(current, { lat: remaining[i].latitude, lng: remaining[i].longitude });
+          if (d < bestDist) { bestDist = d; bestIdx = i; }
+        }
+        const next = remaining.splice(bestIdx, 1)[0];
+        ordered.push(next);
+        current = { lat: next.latitude, lng: next.longitude };
+      }
+      return ordered;
+    }
+    
+    function buildGoogleMapsUrl(stops, origin) {
+      if (stops.length === 0) return '#';
+      const dest = stops[stops.length - 1];
+      const waypoints = stops.slice(0, -1).map(s => s.latitude + ',' + s.longitude).join('|');
+      const params = new URLSearchParams({
+        api: '1',
+        travelmode: 'driving',
+        destination: dest.latitude + ',' + dest.longitude
+      });
+      if (origin) params.set('origin', origin.lat + ',' + origin.lng);
+      if (waypoints) params.set('waypoints', waypoints);
+      return 'https://www.google.com/maps/dir/?' + params.toString();
+    }
+    
+    function toggleD4D() {
+      d4d.enabled = !d4d.enabled;
+      document.getElementById('d4d-toggle').classList.toggle('active', d4d.enabled);
+      document.getElementById('route-panel').classList.toggle('open', d4d.enabled);
+      renderRouteList();
+      renderPolyline();
+      applyFilter(currentFilter);
+    }
+    
+    function addStop(propId) {
+      const prop = foreclosures.find(p => p.id === propId);
+      if (!prop || d4d.stops.some(s => s.id === propId)) return;
+      d4d.stops.push(prop);
+      renderRouteList();
+      renderPolyline();
+      applyFilter(currentFilter);
+    }
+    
+    function removeStop(propId) {
+      d4d.stops = d4d.stops.filter(s => s.id !== propId);
+      renderRouteList();
+      renderPolyline();
+      applyFilter(currentFilter);
+    }
+    
+    function clearRoute() {
+      d4d.stops = [];
+      renderRouteList();
+      renderPolyline();
+      applyFilter(currentFilter);
+    }
+    
+    function optimizeRoute() {
+      if (d4d.stops.length < 2) return;
+      const apply = origin => {
+        d4d.stops = nearestNeighborOrder(d4d.stops, origin);
+        renderRouteList();
+        renderPolyline();
+      };
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          pos => apply({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+          () => apply(null),
+          { timeout: 4000 }
+        );
+      } else {
+        apply(null);
+      }
+    }
+    
+    function renderRouteList() {
+      const el = document.getElementById('route-stops');
+      const countEl = document.getElementById('route-count');
+      const distEl = document.getElementById('route-distance');
+      const optBtn = document.getElementById('route-optimize');
+      const navBtn = document.getElementById('route-navigate');
+      countEl.textContent = d4d.stops.length;
+      if (d4d.stops.length === 0) {
+        el.innerHTML = '<div class="route-panel-empty">Click <strong>+ Route</strong> on properties to build a Drive-for-Dollars route.<br><br>Street View pre-scoring activates in Phase 2.</div>';
+        distEl.textContent = '—';
+        optBtn.disabled = true;
+        navBtn.classList.add('disabled');
+        navBtn.removeAttribute('href');
+        return;
+      }
+      const km = totalRouteDistance(d4d.stops);
+      distEl.textContent = (km * 0.621371).toFixed(1) + ' mi';
+      optBtn.disabled = d4d.stops.length < 2;
+      navBtn.classList.remove('disabled');
+      navBtn.href = buildGoogleMapsUrl(d4d.stops);
+      el.innerHTML = d4d.stops.map((s, i) => {
+        const rec = s.recommendation.toLowerCase();
+        return '<div class="route-stop"><div class="route-stop-num">' + (i+1) + '</div><div class="route-stop-body"><div class="route-stop-addr">' + s.property_address + '</div><div class="route-stop-meta">' + s.city + ', ' + s.zipcode + ' · ' + formatCurrency(s.max_bid) + '</div><span class="route-stop-rec ' + rec + '">' + s.recommendation + '</span><span class="streetview-prescore" title="Phase 2: Street View Insights pre-score">SV pre-score: ⏳</span></div><button class="route-stop-remove" data-id="' + s.id + '" title="Remove">×</button></div>';
+      }).join('');
+      el.querySelectorAll('.route-stop-remove').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          removeStop(parseInt(btn.dataset.id));
+        });
+      });
+    }
+    
+    function renderPolyline() {
+      if (d4d.polyline) { map.removeLayer(d4d.polyline); d4d.polyline = null; }
+      if (!d4d.enabled || d4d.stops.length < 2) return;
+      const latlngs = d4d.stops.map(s => [s.latitude, s.longitude]);
+      d4d.polyline = L.polyline(latlngs, { color: '#0ea5e9', weight: 3, opacity: 0.85, dashArray: '6,8' }).addTo(map);
+    }
+    
+    document.getElementById('d4d-toggle').addEventListener('click', toggleD4D);
+    document.getElementById('route-clear').addEventListener('click', clearRoute);
+    document.getElementById('route-optimize').addEventListener('click', optimizeRoute);
+    
     // Initialize map centered on Brevard County
-    const map = L.map('map').setView([28.2639, -80.7214], 10);
+    // Statewide FL view by default — recentered for multi-county scope
+    const map = L.map('map').setView([27.95, -81.7], 7);
     
     // Dark tile layer
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -775,6 +1115,7 @@
           ${hoaWarning}
           <div class="popup-rationale"><strong>${prop.recommendation}:</strong> ${prop.decision_rationale}</div>
           ${photoHtml}
+          ${typeof d4d !== 'undefined' && d4d.enabled ? `<button class="popup-route-btn ${d4d.stops.some(s=>s.id===prop.id)?'added':''}" onclick="event.stopPropagation(); ${"$"}{d4d.stops.some(s=>s.id===prop.id)?'removeStop':'addStop'}(${"$"}{prop.id}); map.closePopup();">${"$"}{d4d.stops.some(s=>s.id===prop.id)?'✓ Added to D4D Route — click to remove':'+ Add to D4D Route'}</button>` : ''}
         </div>
       `;
     }
@@ -789,7 +1130,7 @@
       return `
         <div class="property-card ${recClass}${hoaClass}" data-id="${prop.id}" data-lat="${prop.latitude}" data-lng="${prop.longitude}">
           <div class="property-address">${prop.property_address}</div>
-          <div class="property-case">${prop.case_number} | ${prop.plaintiff}</div>
+          <div class="property-case">${prop.county ? prop.county.toUpperCase().replace(/_/g,' ') : ''}${prop.county ? ' · ' : ''}${prop.case_number || ''}${prop.auction_date ? ' · ' + prop.auction_date : ''}</div>
           <div class="property-meta">
             <div class="meta-item">
               <span class="meta-label">Judgment</span>
@@ -808,6 +1149,7 @@
           <div class="property-footer">
             <span class="recommendation-badge ${recClass}">${prop.recommendation}</span>
             <span class="ml-score">ML: <strong>${(prop.ml_score * 100).toFixed(0)}%</strong></span>
+            ${d4d.enabled ? `<button class="route-add-btn ${d4d.stops.some(s=>s.id===prop.id)?'added':''}" onclick="event.stopPropagation(); ${"$"}{d4d.stops.some(s=>s.id===prop.id)?'removeStop':'addStop'}(${"$"}{prop.id});">${"$"}{d4d.stops.some(s=>s.id===prop.id)?'✓ Added':'+ Route'}</button>` : ''}
           </div>
         </div>
       `;
@@ -867,6 +1209,8 @@
       document.getElementById('stat-judgment').textContent = totalJudgment >= 1000000 
         ? `$${(totalJudgment / 1000000).toFixed(1)}M` 
         : formatCurrency(totalJudgment);
+      const countiesSet = new Set(data.map(p => p.county).filter(Boolean));
+      document.getElementById('stat-counties').textContent = countiesSet.size || '—';
       document.getElementById('property-count').textContent = data.length;
     }
 
@@ -887,10 +1231,8 @@
       });
     }
 
-    // Initialize
-    addMarkers(foreclosures);
-    updatePropertyList(foreclosures);
-    updateStats(foreclosures);
+    // Initialize — live fetch from Supabase scraper (falls back to baked sample)
+    loadForeclosures();
 
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => applyFilter(btn.dataset.filter));

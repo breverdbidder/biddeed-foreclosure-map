@@ -1,7 +1,7 @@
 {
   "name": "biddeed-foreclosure-map",
-  "version": "15.0.0",
-  "description": "BidDeed.AI Interactive Foreclosure Map - Brevard County, FL",
+  "version": "16.0.0",
+  "description": "BidDeed.AI — Live multi-county Florida foreclosure & tax deed auction map with Drive-for-Dollars route builder",
   "author": "Ariel Shapira <ariel@everestcapitalusa.com>",
   "license": "PROPRIETARY",
   "private": true,
@@ -18,9 +18,13 @@
   "keywords": [
     "foreclosure",
     "auction",
+    "tax-deed",
     "real-estate",
-    "brevard-county",
     "florida",
+    "multi-county",
+    "drive-for-dollars",
+    "d4d",
+    "biddeed",
     "map",
     "leaflet",
     "investment"
